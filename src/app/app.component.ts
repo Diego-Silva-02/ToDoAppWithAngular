@@ -8,6 +8,7 @@ import { ToDo } from 'src/models/toDo.model';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  public mode: string = 'list';
   public toDos: ToDo[] = [];
   public tittle: String = 'My tasks';
   public form!: FormGroup;
@@ -65,5 +66,9 @@ export class AppComponent {
       this.toDos = JSON.parse(data || '{}');
     else
       this.toDos = []
+  }
+
+  chandeMode(modeToChange: string) {
+    this.mode = modeToChange
   }
 }

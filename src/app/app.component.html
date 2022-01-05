@@ -1,5 +1,5 @@
-<h1 class="tittle">{{ tittle }}</h1>
-<ul>
+<h1 class="tittle animated jackInTheBox">{{ tittle }}</h1>
+<ul class="animated flipInX" *ngIf="mode=='list'">
   <p *ngIf="toDos.length === 0"><small>You don't have task's today!</small></p>
   <li *ngFor="let toDo of toDos">{{ toDo.id }}. {{ toDo.tittle }} - 
     <button *ngIf="!toDo.done" (click)="markAsDone(toDo)">Done</button> 
@@ -8,11 +8,23 @@
   </li>
 </ul>
 
-<form [formGroup]="form">
-  <fieldset>
-    <label>Task: </label>
-    <input type="text" placeholder="Task tittle" maxlength="60" formControlName="tittle">
-    <small *ngIf="form.controls['tittle'].invalid && !form.controls['tittle'].pristine">This field must contain 3 to 60 characters.</small>
-    <button class="button" [disabled]="form.invalid" (click)="add()">Save</button>
-  </fieldset>
-</form>
+<div id="modal" *ngIf="mode=='add'" class="animated flixInX">
+  <form [formGroup]="form">
+    <fieldset>
+      <label>Task: </label>
+      <input type="text" placeholder="Task tittle" maxlength="60" formControlName="tittle">
+      <small *ngIf="form.controls['tittle'].invalid && !form.controls['tittle'].pristine">This field must contain 3 to 60 characters.</small>
+      <button class="button" [disabled]="form.invalid" (click)="add()">Save</button>
+    </fieldset>
+  </form>
+</div>
+
+<button class="add-button animated fadeInUp button" (click)="chandeMode('add')" *ngIf="mode=='list'">
+  <i class="fas fa-plus-circle"></i> <!--font-awesome-->
+  NOVA TAREFA
+</button>
+
+<button class="add-button animated fadeInUp button" (click)="chandeMode('list')" *ngIf="mode=='add'">
+  <i class="fas fa-times"></i> <!--font-awesome-->
+  CANCELAR
+</button>
