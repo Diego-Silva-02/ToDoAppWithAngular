@@ -61,6 +61,9 @@ export class AppComponent {
 
   load() { // load localstorage
     const data = localStorage.getItem('toDos');
-    this.toDos = JSON.parse(data || '{}');
+    if (data)
+      this.toDos = JSON.parse(data || '{}');
+    else
+      this.toDos = []
   }
 }

@@ -1,4 +1,4 @@
-<h1>{{ tittle }}</h1>
+<h1 class="tittle">{{ tittle }}</h1>
 <ul>
   <p *ngIf="toDos.length === 0"><small>You don't have task's today!</small></p>
   <li *ngFor="let toDo of toDos">{{ toDo.id }}. {{ toDo.tittle }} - 
@@ -13,6 +13,6 @@
     <label>Task: </label>
     <input type="text" placeholder="Task tittle" maxlength="60" formControlName="tittle">
     <small *ngIf="form.controls['tittle'].invalid && !form.controls['tittle'].pristine">This field must contain 3 to 60 characters.</small>
-    <button [disabled]="form.invalid" (click)="add()">Save</button>
+    <button class="button" [disabled]="form.invalid" (click)="add()">Save</button>
   </fieldset>
 </form>
