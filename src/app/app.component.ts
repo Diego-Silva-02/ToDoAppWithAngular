@@ -20,10 +20,17 @@ export class AppComponent {
         Validators.required
       ])]
     });
+  }
 
-    this.toDos.push(new ToDo(1, 'Walk with the dog', false));
-    this.toDos.push(new ToDo(2, 'Go to market', false));
-    this.toDos.push(new ToDo(3, 'Have a haircut', true));
+  add() {
+    const tittle = this.form.controls['tittle'].value;
+    const id = this.toDos.length + 1
+    this.toDos.push(new ToDo(id, tittle, false))
+    this.clear();
+  }
+
+  clear() {
+    this.form.reset();
   }
 
   delete(toDo: ToDo) {
