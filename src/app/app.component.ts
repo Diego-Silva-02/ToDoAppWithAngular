@@ -20,12 +20,15 @@ export class AppComponent {
         Validators.required
       ])]
     });
+
+    this.load();
   }
 
   add() {
     const tittle = this.form.controls['tittle'].value;
     const id = this.toDos.length + 1
     this.toDos.push(new ToDo(id, tittle, false))
+    this.save();
     this.clear();
   }
 
@@ -38,13 +41,26 @@ export class AppComponent {
     if (index !== -1) {
       this.toDos.splice(index, 1);
     }
+    this.save();
   }
 
   markAsDone(toDo: ToDo) {
     toDo.done = true;
+    this.save();
   }
 
   markAsUndone(toDo: ToDo) {
     toDo.done = false;
+    this.save();
+  }
+
+  save() { // save in localstorage
+    const data = JSON.stringify(this.toDos);
+    localStorage.setItem('toDos', data)
+  }
+
+  load() { // load localstorage
+    const data = localStorage.getItem('toDos');
+    this.toDos = JSON.parse(data || '{}');
   }
 }
