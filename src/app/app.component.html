@@ -1,21 +1,21 @@
 <h1 class="tittle animated jackInTheBox">{{ tittle }}</h1>
 <ul class="animated flipInX" *ngIf="mode=='list'">
-  <p *ngIf="toDos.length === 0"><small>You don't have task's today!</small></p>
-  <li *ngFor="let toDo of toDos">{{ toDo.id }}. {{ toDo.tittle }} - 
-    <button *ngIf="!toDo.done" (click)="markAsDone(toDo)">Done</button> 
-    <button *ngIf="toDo.done" (click)="markAsUndone(toDo)">Remake</button> |
-    <button (click)="delete(toDo)">Delete</button>
+  <p class="text-center" *ngIf="toDos.length === 0"><small>You don't have task's today!</small></p>
+  <li *ngFor="let toDo of toDos">{{ toDo.tittle }}
+    <button (click)="delete(toDo)"><i class="fas fa-trash-alt"></i> Delete</button> <!--font-awesome-->
+    <button *ngIf="!toDo.done" (click)="markAsDone(toDo)"><i class="far fa-check-circle"></i></button> <!--font-awesome-->
+    <button *ngIf="toDo.done" (click)="markAsUndone(toDo)"><i class="fas fa-check-circle"></i></button> <!--font-awesome-->
   </li>
 </ul>
 
 <div id="modal" *ngIf="mode=='add'" class="animated flixInX">
+  <h1 class="text-center">New Task</h1>
   <form [formGroup]="form">
-    <fieldset>
-      <label>Task: </label>
-      <input type="text" placeholder="Task tittle" maxlength="60" formControlName="tittle">
-      <small *ngIf="form.controls['tittle'].invalid && !form.controls['tittle'].pristine">This field must contain 3 to 60 characters.</small>
-      <button class="button" [disabled]="form.invalid" (click)="add()">Save</button>
-    </fieldset>
+    <input type="text" placeholder="Task tittle" maxlength="60" formControlName="tittle">
+    <small class="danger" *ngIf="form.controls['tittle'].invalid && !form.controls['tittle'].pristine">This field must contain 3 to 60 characters.<br></small>
+    <p class="text-center">
+      <button class="button" [disabled]="form.invalid" (click)="add()"><i class="far fa-save"></i> Save</button> <!--font-awesome-->
+    </p>
   </form>
 </div>
 

@@ -58,6 +58,7 @@ export class AppComponent {
   save() { // save in localstorage
     const data = JSON.stringify(this.toDos);
     localStorage.setItem('toDos', data)
+    this.mode = 'list'
   }
 
   load() { // load localstorage
